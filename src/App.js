@@ -26,6 +26,7 @@ function App() {
         <Route path='/purchases' element={<Purchased />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/add-product' element={<AddProduct />} />
+        
 
 
         <Route path='/product/:id' element={<EditProduct />} />

@@ -102,7 +102,6 @@ function Purchased(props) {
                 final.push(date[i])
             }
 
-
             setFoundQuery(final)
 
 

@@ -43,7 +43,7 @@ const addItem = async (type, dispatch, myCollection, obj, nav) => {
 const addItemPurchase = async (type, dispatch, myCollection, obj, nav, purObj) => {
     const q = query(collection(db, myCollection));
     const purchaseQ = query(collection(db, 'purchases'));
-    
+
     let purId;
     let qDocId;
 
@@ -70,11 +70,34 @@ const addItemPurchase = async (type, dispatch, myCollection, obj, nav, purObj) =
         });
     });
 
+
+
     // Call the updateDocId function with the purId
     updateDocId(purId);
 
     nav('/products');
 };
+async function custPurchase(custId, purObj, custObj, dispatch) {
+    const purQ = query(collection(db, 'purchases'))
+    const custQ = query(doc(db, 'customers', custId));
+    let purchaseId
+
+    await addDoc(purQ, purObj).then(async (d) => {
+        const q = query(doc(db, 'purchases', d.id))
+        purObj = { ...purObj, id: d.id }
+        purchaseId = d.id
+        await updateDoc(q, purObj)
+    })
+
+    let obj = { ...custObj }
+    obj = { ...obj, purId: [...obj.purId, purchaseId] }
+
+
+    await updateDoc(custQ, obj)
+    dispatch({ type: 'UPDATE-CUST', payload: obj })
+
+
+}
 
 const updateDocId = async (purId) => {
     // Implement your logic to update the 'purchases' document with its own ID
@@ -106,4 +129,4 @@ const getQueryData = async (myCollection, myKey, myOperator, myValue) => {
 }
 
 
-export default { getAll, getByID, update, addItem, removeItem, getQueryData, addItemPurchase,updateDocId }
+export default { getAll, getByID, update, addItem, removeItem, getQueryData, addItemPurchase, updateDocId, custPurchase };

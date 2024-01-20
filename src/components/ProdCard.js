@@ -61,6 +61,10 @@ function ProdCard(props) {
                 isAdmin &&
                 <button onClick={handleDelete} className='edit-card-button' style={{ position: 'absolute', top: '13vh',border:'1px solid black' }}>Delete Product</button>
             }
+            {
+                isAdmin &&
+                <button className='edit-card-button' style={{ position: 'absolute', top: '22vh',border:'1px solid black' }}>Customers List</button>
+            }
             <h4 style={{ position: 'absolute', bottom: '20px' }} >{props.price}$</h4>
             <h4 style={{ position: 'absolute', bottom: '20px', right: '0' }}>{props.quantity > 0 ? 'In Stock' : 'Out Of Stock'}</h4>
             <br />

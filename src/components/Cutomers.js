@@ -4,12 +4,15 @@ import utils from '../utils';
 import { Link, useNavigate } from 'react-router-dom';
 import EditCustomer from './EditCustomer';
 import Swal from 'sweetalert2'
+import BuyCustomer from './BuyCustomer';
 
 function Cutomers(props) {
     const dispatch = useDispatch()
     const customers = useSelector(state => state.customers)
     const [clickedCustomer, setClickedCustomer] = useState(false)
+    const [clickedBuy, setClickedBuy] = useState(false)
     const [clickedCustomerId, setClickedCustomerId] = useState('')
+    const [buyingCustomer, setBuyingCustomer] = useState({})
     const nav = useNavigate()
 
     useEffect(() => {
@@ -17,8 +20,8 @@ function Cutomers(props) {
         utils.getAll('GET-CUST', dispatch, 'customers')
 
 
-        
-        
+
+
 
 
     }, [])
@@ -36,9 +39,8 @@ function Cutomers(props) {
             if (result.isConfirmed) {
                 utils.removeItem('DELETE-CUSTOMER', dispatch, 'customers', id)
 
-                const data = await utils.getQueryData('purchases','customerId','==',id)
-                console.log('delete DATA: ',data);
-                for(let i in data){
+                const data = await utils.getQueryData('purchases', 'customerId', '==', id)
+                for (let i in data) {
                     utils.removeItem('DELETE-PURCHASE', dispatch, 'purchases', data[i].id)
 
                 }
@@ -62,12 +64,10 @@ function Cutomers(props) {
     }
     const handleCustomerClick = (cust) => {
         if (cust.id == clickedCustomerId && clickedCustomer) {
-            console.log('ya');
             setClickedCustomer(false)
             return
         }
 
-        console.log(cust.id);
         setClickedCustomerId(cust.id)
         setClickedCustomer(true)
 
@@ -93,8 +93,6 @@ function Cutomers(props) {
                     </tr>
                     {customers.map((cust, index) => {
                         const ProdIds = []
-                        console.log('id', cust.id);
-
                         return (
                             <tr key={index}>
 
@@ -123,7 +121,7 @@ function Cutomers(props) {
 
                                 <td style={{ cursor: 'pointer' }}><i className="fa-solid fa-trash" onClick={() => { handleDelete(cust.id) }}></i></td>
                                 <td style={{ cursor: 'pointer' }} onClick={() => { handleCustomerClick(cust) }}>Edit</td>
-                                <td style={{ cursor: 'pointer' }} onClick={() => { handleCustomerClick(cust) }}>BuyProd</td>
+                                <td style={{ cursor: 'pointer' }} onClick={() => { setBuyingCustomer(cust);setClickedBuy(!clickedBuy)}} >BuyProd</td>
 
                             </tr>
 
@@ -148,6 +146,13 @@ function Cutomers(props) {
                 </div>
 
 
+            }
+            {
+                clickedBuy &&
+                <div className='customer-container'>
+                    <br /> <br />
+                    <BuyCustomer customer={buyingCustomer} id={buyingCustomer.id} />
+                </div>
             }
         </>
     );

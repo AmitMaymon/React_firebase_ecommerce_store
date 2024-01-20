@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css'
+import { useSelector } from 'react-redux';
 
 function Menu(props) {
-
+    const isAdmin = useSelector(state=>state.isAdmin)
 
 
 
@@ -13,7 +14,10 @@ function Menu(props) {
             <div id="menu-items">
             <Link to={'/products'} className='menu-item' >Products</Link>
             <Link to={'/customers'} className='menu-item'>Customers</Link>
-            <Link to={'/purchased'} className='menu-item'>Purchased</Link>
+            {
+                isAdmin &&
+            <Link to={'/purchases'} className='menu-item'>Purchased</Link>
+            }
             </div>
             <div id='menu-background-pattern'></div>
         </div>
