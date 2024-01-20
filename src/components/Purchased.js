@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import utils from '../utils';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -18,11 +18,14 @@ function Purchased(props) {
     const [selectedDate, setSelectedDate] = useState('')
     const [selectUpdate, setSelectUpdate] = useState(false)
     const [foundQuery, setFoundQuery] = useState([])
-    const [inParams,setInParams] = useState(false)
+    const [inParams, setInParams] = useState(false)
+    const [inProps, setInProps] = useState(false)
     const dispatch = useDispatch()
     const params = useParams()
-    const productRef= useRef(null)
-    const buttonRef= useRef(null)
+    const productRef = useRef(null)
+    const customerRef = useRef(null)
+    const buttonRef = useRef(null)
+    const nav = useNavigate()
 
 
     useEffect(() => {
@@ -34,31 +37,43 @@ function Purchased(props) {
 
             productRef.current.value = params.id
             setSelectedProd(params.id)
-            
-            
 
 
 
+
+
+        }
+        const withProps = async () => {
+            customerRef.current.value = props.id
+            setSelectedCust(props.id)
         }
 
         if (params.id) {
             setInParams(true)
             withParmas()
         }
-
-
-
-
-    }, [])
-    useEffect(()=>{
-        if(inParams){
-            buttonRef.current.click()
-            setInParams(false)
+        if (props.id) {
+            setInProps(true)
+            withProps()
         }
 
 
 
-    },[selectedProd])
+
+    }, [props,params])
+    useEffect(() => {
+        if (inParams) {
+            buttonRef.current.click()
+            setInProps(false)
+        }
+        if (inProps) {
+            buttonRef.current.click()
+            setInProps(false)
+        }
+
+
+
+    }, [selectedProd, selectedCust])
 
 
 
@@ -155,7 +170,7 @@ function Purchased(props) {
                 <div className='customers-container'>
 
                     <select id='productInput' ref={productRef} name="products" onChange={(e) => { setSelectedProd(e.target.value) }}>
-                        <option value="" selected disabled>Please select a product</option>
+                        <option value="" selected >All Products</option>
                         {
                             products.map((prod, index) => {
 
@@ -167,8 +182,8 @@ function Purchased(props) {
 
                     </select>
 
-                    <select name="customers" onChange={(e) => { setSelectedCust(e.target.value) }}>
-                        <option value="" selected disabled>Please select a customer</option>
+                    <select name="customers" ref={customerRef} onChange={(e) => { setSelectedCust(e.target.value) }}>
+                        <option value="" selected >All Customers</option>
                         {
                             customers.map((cust, index) => {
 
@@ -213,7 +228,7 @@ function Purchased(props) {
                                                 </span>
                                             ))}
                                         </td>
-                                        <td style={{ cursor: 'pointer' }}>{item.customerId}</td>
+                                        <td style={{ cursor: 'pointer' }} onClick={()=>{nav('/customer/' + item.customerId)}}>{item.customerId}</td>
                                         <td style={{ cursor: 'pointer' }}>{item.id}</td>
                                     </tr>
                                 ))

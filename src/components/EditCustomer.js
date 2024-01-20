@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './test.css'
 function EditCustomer(props) {
     let { id } = props
+    let {id:pId} = useParams()
 
 
 
@@ -23,8 +24,12 @@ function EditCustomer(props) {
     })
 
     useEffect(() => {
+        if(id){
+            utils.getByID('GET-CUST-ID', dispatch, 'customers', id)
 
-        utils.getByID('GET-CUST-ID', dispatch, 'customers', id)
+        }else if(pId){
+            utils.getByID('GET-CUST-ID', dispatch, 'customers', pId)
+        }
 
 
     }, [id])
@@ -90,14 +95,14 @@ function EditCustomer(props) {
             
             </div>
             <div className='customers-container'>
-
+{/* 
                 <table style={{margin:'auto'}}>
                     <tr>
 
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Id</th>
-                        <th>Purchase Id</th>
+                        
                     </tr>
 
 
@@ -108,7 +113,7 @@ function EditCustomer(props) {
                                     <td>{prod.name}</td>
                                     <td>{prod.price}</td>
                                     <td>{prod.id}</td>
-                                    <td>{customer.purId}</td>
+                                    
                                     
                                 </tr>
 
@@ -116,7 +121,7 @@ function EditCustomer(props) {
 
                         })
                     }
-                </table>
+                </table> */}
             </div>
 
         </div>

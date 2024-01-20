@@ -10,6 +10,8 @@ import Cart from './components/Cart';
 import EditProduct from './components/EditProduct';
 import AddProduct from './components/AddProduct';
 import EditCustomer from './components/EditCustomer'
+import Login from './components/Login';
+import NotFound from './components/NotFound';
 function App() {
 
   const location = useLocation()
@@ -26,7 +28,8 @@ function App() {
         <Route path='/purchases' element={<Purchased />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/add-product' element={<AddProduct />} />
-        
+        <Route path='/login' element={<Login />} />
+
 
 
         <Route path='/product/:id' element={<EditProduct />} />
@@ -34,6 +37,8 @@ function App() {
         <Route path='/purchases/:id' element={<Purchased />} />
 
 
+
+        <Route path='*' element={<NotFound/>} />
       </Routes>
 
     </div>
