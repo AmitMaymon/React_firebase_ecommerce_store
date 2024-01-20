@@ -1,38 +1,238 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(20, 20, 20);
+  margin: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-bar {
   display: flex;
-  flex-direction: column;
+  height: 9vh;
+  width: vw;
   align-items: center;
+  justify-content: space-around;
+
+ 
+}
+
+#nav-item {
+  text-decoration: none;
+  color: antiquewhite;
+  font-family: 'Ibarra Real Nova', serif;
+  font-size: 20px;
+  z-index: 2;
+
+}
+
+
+#menu {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item {
+  color: antiquewhite;
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-family: 'Ibarra Real Nova', serif;
+  display: block;
+  text-decoration: none;
+  padding: clamp(0.25rem, 0.5vw, 1rem);
+
+}
+
+#menu-items {
+  margin-left: clamp(4rem, 20vw, 48rem);
+  position: relative;
+  z-index: 2;
+}
+
+
+#menu-items:hover>.menu-item {
+  transition: 800ms ease;
+  opacity: 0.3;
+}
+
+#menu-items:hover>.menu-item:hover {
+  opacity: 1;
+}
+
+#menu-background-pattern {
+  height: 100vh;
+  width: 40vw;
+
+  background-image: radial-gradient(rgba(2255, 255, 255, 0.1) 15%,
+      transparent 9%);
+  background-position: 0% 0%;
+  background-size: 12vmin 12vmin;
+
+  position: absolute;
+  left: 15vw;
+  top: 0px;
+  z-index: 1;
+  transition: opacity 800ms ease,
+    background-size 1500ms ease;
+}
+
+#menu-items:hover~#menu-background-pattern {
+  background-size: 13vmin 13vmin;
+  opacity: 0.5;
+}
+
+
+
+.product-container {
+  width: 100vw;
+  display: block;
+  justify-content: space-around;
+  text-align: center;
+  color: antiquewhite;
+}
+.customers-container{
+  color: antiquewhite;
+  font-family: 'Ibarra Real Nova', serif;
+  display: flex;
+  width: 97vw;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* align-items: center; */
+  flex-wrap: wrap;
+  gap: 30px 30px;
+
+}
+
+.card-container {
+  color: antiquewhite;
+  font-family: 'Ibarra Real Nova', serif;
+  display: flex;
+  width: 97vw;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex-wrap: wrap;
+  gap: 30px 30px;
+
+
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 60%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card-item {
+  position: relative;
+  min-width: 250px ;
+  margin-right: 5%;
+  text-align: center;
+  width: 250px ;
+  height: 40vh;
+  z-index: 2;
+  border: 1px solid black;
+  box-shadow: 14px 15px 20px black;
+  opacity: 0.7;
+  margin-left: 10vw;
+
+  transition: opacity 500ms ease,
+    width 700ms ease, height 700ms ease;
+
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-item:hover {
+  opacity: 1;
+  background-size: 12vmin;
+  width: 255px;
+  height: 41vh;
+  transition: opacity 500ms ease,
+    width 700ms ease, height 700ms ease
+}
+
+/* swal */
+/* 
+.swal-modal {
+  background-color: rgba(235, 220, 147, 0.69);
+} */
+/* .swal-button:hover {
+  background-color: black;
+} */
+
+
+.swal-button--Cancel {
+background-color: red;
+}
+
+
+#card-img {
+  width: 100%;
+  height: 62%;
+
+}
+
+i {
+  --fa-animation-duration: 1s;
+  --fa-animation-iteration-count:1
+}
+
+.card-button {
+  width: 100%;
+  height: 6%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  background-color: rgb(20, 20, 20);
+  color: white;
+  border: none;
+
+}
+
+.card-button:hover {
+  background-color: rgb(30, 30, 30);
+  transition: background-color 400ms ease;
+
+
+}
+
+
+.edit-card-button {
+  right: -70px;
+  max-width: 70px;
+  background-color: rgb(30, 30, 30);
+  color: white;
+  border: none;
+
+}
+
+
+.edit-card-button:hover {
+  background-color: rgb(50, 50, 50);
+  transition: background-color 400ms ease;
+
+
+}
+
+
+.clickable-link{
+text-decoration: none;
+  color: antiquewhite;
+  padding-right: 5px;
+}
+
+.clickable-link:visited{
+  text-decoration: none;
+}
+.clickable-link:hover{
+  
+  color: white;
+
+  transition: color 500ms ease;
 }
