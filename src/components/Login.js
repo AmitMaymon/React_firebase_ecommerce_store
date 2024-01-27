@@ -106,7 +106,7 @@ function Login(props) {
                 <input type="password" placeholder="Password" style={inputStyle} name="password" value={password} onChange={handleChange} />
                 Admin Privilleges<input defaultValue={false} type="checkbox" name="admin" id="" onChange={handleChange} />
                 <button onClick={handleRegister} style={buttonStyle}>Register</button>
-                <a ><Link to={'/login/account-login'}>Already have an account? </Link></a>
+                {/* <a ><Link to={'/login/account-login'}>Already have an account? </Link></a>  Notyet implemented*/} 
                 <button onClick={handleLogin} style={buttonStyle}>Login</button>
             </div>
         </div>
