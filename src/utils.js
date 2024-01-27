@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore'
-import {db} from './firebase/firebase'
-
+import { db } from './firebase/firebase'
+import ts from 'time-stamp'
 
 
 const getAll = (type, dispatch, myCollection) => {
@@ -129,4 +129,34 @@ const getQueryData = async (myCollection, myKey, myOperator, myValue) => {
 }
 
 
-export default { getAll, getByID, update, addItem, removeItem, getQueryData, addItemPurchase, updateDocId, custPurchase };
+
+const shouldReLogin = () => {
+    const dateString = JSON.parse(localStorage.getItem('loggedTime'))
+    if(!dateString){
+        return true
+    }
+    const [datePart, timePart] = dateString.split(':');
+    const [day, month, year] = datePart.split('/').map(Number);
+    const [hours, minutes] = timePart.split(':')
+    if (ts('DD/MM/YYYY') != datePart) {
+        console.log('Date False');
+        return true
+    }
+    const tempHourNow = ts('HH')+ ts('mm')
+    const tempHour = dateString.split(':')[1]+dateString.split(':')[2]
+
+    if (parseInt(tempHourNow) - parseInt(tempHour) > 100) {
+        console.log('Hour Failed')
+        return true
+    }
+    return false
+
+
+};
+
+
+
+
+
+
+export default { getAll, getByID, update, addItem, removeItem, getQueryData, addItemPurchase, updateDocId, custPurchase, shouldReLogin };

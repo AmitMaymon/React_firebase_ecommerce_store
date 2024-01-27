@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import ts from 'time-stamp';
+import utils from '../utils';
 
 function Login(props) {
-
+    const nav = useNavigate()
+    const dispatch = useDispatch()
+    const loggedIn = useSelector(state => state.loggedIn)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [admin, setAdmin] = useState(false)
 
-    // Handle changes in the form fields
+
+
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
         if (name === 'email') setEmail(value);
@@ -17,10 +24,10 @@ function Login(props) {
         if (name === 'admin') setAdmin(checked);
     };
 
-    // Handle the form submission for registration
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
+            const registeredAt = ts('DD/MM/YYYY:HH:mm')
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user
             // Registration successful
@@ -28,10 +35,13 @@ function Login(props) {
             await setDoc(doc(db, 'users', user.uid), {
                 email: email,
                 id: user.uid,
-                admin: admin
+                admin: admin,
+                registeredAt: registeredAt
             })
             alert('SUCCESS')
             await signInWithEmailAndPassword(auth, email, password);
+            localStorage.setItem('uId', user.uid)
+            dispatch({ type: 'LOGIN', payload: ts('DD/MM/YYYY:HH:mm') })
         } catch (error) {
             // Handle Errors here.
             console.error("Error in user registration", error.message);
@@ -42,8 +52,15 @@ function Login(props) {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const user = await signInWithEmailAndPassword(auth, email, password);
+            const { uid } = user.user
             alert('SUCCESS')
+            localStorage.setItem('uId', JSON.stringify(uid))
+            const admin = await utils.getQueryData('users', 'id', '==', uid)
+            console.log(admin);
+            dispatch({ type: 'LOGIN', payload:{ time:ts('DD/MM/YYYY:HH:mm'),admin:admin[0].admin} })
+            nav('/')
+
         } catch (error) {
             // Handle Errors here.
             console.error("Error in user login", error.message);
@@ -89,6 +106,7 @@ function Login(props) {
                 <input type="password" placeholder="Password" style={inputStyle} name="password" value={password} onChange={handleChange} />
                 Admin Privilleges<input defaultValue={false} type="checkbox" name="admin" id="" onChange={handleChange} />
                 <button onClick={handleRegister} style={buttonStyle}>Register</button>
+                <a ><Link to={'/login/account-login'}>Already have an account? </Link></a>
                 <button onClick={handleLogin} style={buttonStyle}>Login</button>
             </div>
         </div>

@@ -19,7 +19,6 @@ function BuyCustomer(props) {
 
 
     const handleClick = () => {
-        console.log(props.customer);
         const currentProd = products.find(prod => selectedProd == prod.id)
 
         const purObj = {
@@ -35,7 +34,6 @@ function BuyCustomer(props) {
 
 
 
-        console.log(props.id);
         utils.custPurchase(props.id,purObj,custobj,dispatch)
 
 

@@ -29,7 +29,6 @@ function Cart(props) {
     }
     useEffect(() => {
         setCustomer({ ...customer, products: cart })
-        console.log(customer);
 
 
 
@@ -59,7 +58,6 @@ function Cart(props) {
             return
         }
 
-        console.log('Purchased');
         utils.addItemPurchase('PURCHASE', dispatch, 'customers', customer, nav, purchase)
 
 

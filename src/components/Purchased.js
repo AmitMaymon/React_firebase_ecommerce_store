@@ -87,11 +87,9 @@ function Purchased(props) {
         }
 
         const formattedDate = formatDate(selectedDate)
-        console.log('Date', formattedDate);
         const cust = await utils.getQueryData('customers', 'id', selectedCust == '' ? '!=' : '==', selectedCust)
         const prod = await utils.getQueryData('products', 'id', selectedProd == '' ? '!=' : '==', selectedProd)
         const date = await utils.getQueryData('purchases', 'date', selectedDate == '' ? '!=' : '==', formattedDate)
-        console.log('DATEN: ', date, 'SELECT: ', selectedDate);
 
         const final = []
         let double = false
@@ -124,11 +122,7 @@ function Purchased(props) {
 
 
         }
-        console.log();
-        console.log(q);
-        console.log("Cust: ", selectedCust, 'Prod: ', selectedProd, 'Date: ', selectedDate);
-        console.log("Cust: ", cust, 'Prod: ', prod, 'Date: ', date);
-        console.log('Final: ', final);
+
 
 
 
@@ -147,7 +141,6 @@ function Purchased(props) {
             setSelectUpdate(val)
             setFoundQuery([])
         }
-        console.log('called');
         update(false)
         update(true)
 

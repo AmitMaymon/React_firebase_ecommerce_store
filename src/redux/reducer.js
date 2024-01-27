@@ -1,4 +1,4 @@
-
+import utils from "../utils";
 const storedCart = JSON.parse(localStorage.getItem('cart')) || []
 console.log(storedCart);
 
@@ -7,11 +7,12 @@ const initialState = {
     customers: [],
     customer: [],
     product: {},
-    isAdmin: true,
+    isAdmin: JSON.parse(localStorage.getItem('a'))||false,
     addedToCart: false,
     cart: storedCart,
     purchasesList: [],
     purchases: 0,
+    loggedIn: utils.shouldReLogin()
 
 
 }
@@ -148,6 +149,20 @@ const globalStates = (state = initialState, action) => {
 
 
         }
+        case 'LOGIN': {
+            localStorage.setItem('loggedTime', JSON.stringify(action.payload.time))
+            localStorage.setItem('a', JSON.stringify(action.payload.admin))
+            const user = utils.getQueryData('users', 'uId', '==', JSON.parse(localStorage.getItem('uId')))
+            console.log(user);
+
+            return { ...state, loggedIn: false, isAdmin: action.payload.admin }
+        }
+        case 'RE-LOGIN': {
+
+
+            return { ...state, loggedIn: true }
+        }
+
 
 
         default:

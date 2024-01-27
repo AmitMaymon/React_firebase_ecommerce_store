@@ -43,7 +43,6 @@ function EditCustomer(props) {
             products: customer.products,
             purId:customer.purId
         })
-        console.log(customer,tempCustomer);
 
 
     }, [customer])
