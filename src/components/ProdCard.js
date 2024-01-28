@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import utils from '../utils'
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function ProdCard(props) {
     const dispatch = useDispatch()
     const isAdmin = useSelector(state => state.isAdmin)
-    const addedToCart = useSelector(state => state.addedToCart)
+    // const addedToCart = useSelector(state => state.addedToCart)
     const nav = useNavigate()
 
 
@@ -47,7 +47,7 @@ function ProdCard(props) {
         <div className='card-item'>
             <h3>{props.name}</h3>
             <br />
-            <img id='card-img' src={props.img} alt="product picture" />
+            <img id='card-img' src={props.img} alt="product" />
             
             {
 

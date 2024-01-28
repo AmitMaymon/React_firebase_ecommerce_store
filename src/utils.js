@@ -14,7 +14,7 @@ const getAll = (type, dispatch, myCollection) => {
 const getByID = (type, dispatch, myCollection, id) => {
     const q = query(doc(db, myCollection, id));
     onSnapshot(q, (doc) => {
-        if (type == '') {
+        if (type === '') {
             const data = doc.data()
             return doc
         } else {
@@ -138,7 +138,7 @@ const shouldReLogin = () => {
     const [datePart, timePart] = dateString.split(':');
     const [day, month, year] = datePart.split('/').map(Number);
     const [hours, minutes] = timePart.split(':')
-    if (ts('DD/MM/YYYY') != datePart) {
+    if (ts('DD/MM/YYYY') !== datePart) {
         console.log('Date False');
         return true
     }

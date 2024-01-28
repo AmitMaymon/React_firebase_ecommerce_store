@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, {  useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import utils from '../utils'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ProdCard from './ProdCard';
 
 function AddProduct(props) {

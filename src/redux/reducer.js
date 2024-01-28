@@ -47,7 +47,7 @@ const globalStates = (state = initialState, action) => {
             return { ...state, customers: action.payload }
         }
         case 'UPDATE-PROD': {
-            const index = state.products.findIndex(item => item.id == action.payload.id)
+            const index = state.products.findIndex(item => item.id === action.payload.id)
             if (index !== -1) {
                 const updatedProds = [...state.products]
                 updatedProds[index] = action.payload
@@ -58,7 +58,7 @@ const globalStates = (state = initialState, action) => {
 
         }
         case 'UPDATE-CUST': {
-            const index = state.customers.findIndex(item => item.id == action.payload.id)
+            const index = state.customers.findIndex(item => item.id === action.payload.id)
             if (index !== -1) {
                 const updatedCustomers = [...state.customers]
                 updatedCustomers[index] = action.payload
@@ -79,7 +79,7 @@ const globalStates = (state = initialState, action) => {
         }
 
         case 'DELETE-PROD': {
-            const index = state.products.findIndex(item => item.id == action.payload)
+            const index = state.products.findIndex(item => item.id === action.payload)
             if (index !== -1) {
                 const updatedProds = [...state.products]
                 //REMOVE ITEM
@@ -103,7 +103,7 @@ const globalStates = (state = initialState, action) => {
             return { ...state, cart: updatedCart }
         }
         case 'DELETE-FROM-CART': {
-            const index = state.cart.findIndex(item => item.id == action.payload)
+            const index = state.cart.findIndex(item => item.id === action.payload)
             if (index !== -1) {
                 const updatedCart = [...state.cart]
                 updatedCart.splice(index, 1)
@@ -136,7 +136,7 @@ const globalStates = (state = initialState, action) => {
 
 
         case 'DELETE-CUSTOMER': {
-            const index = state.customers.findIndex(item => item.id == action.payload)
+            const index = state.customers.findIndex(item => item.id === action.payload)
             if (index !== -1) {
                 const updatedCustomers = [...state.cart]
                 updatedCustomers.splice(index, 1)

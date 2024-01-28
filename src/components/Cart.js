@@ -42,7 +42,7 @@ function Cart(props) {
 
 
     const handleClick = () => {
-        if (cart.length == 0) {
+        if (cart.length === 0) {
             Swal.fire({
                 title: 'Your Cart is Empty,please add a product to your cart',
                 confirmButtonColor:"#1e1e1e"
@@ -71,7 +71,7 @@ function Cart(props) {
         for (let key in customer) {
             let value = customer[key]
 
-            if (value == '') {
+            if (value === '') {
 
                 fields.push(key)
                 // setEmptyFields(prevFields => ([...prevFields, key]))
@@ -83,7 +83,7 @@ function Cart(props) {
         }
 
 
-        if (counter == Object.keys(customer).length) {
+        if (counter === Object.keys(customer).length) {
             return { status: true, fields }
         } else {
             return { status: false, fields }

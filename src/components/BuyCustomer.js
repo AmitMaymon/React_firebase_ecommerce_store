@@ -19,7 +19,7 @@ function BuyCustomer(props) {
 
 
     const handleClick = () => {
-        const currentProd = products.find(prod => selectedProd == prod.id)
+        const currentProd = products.find(prod => selectedProd === prod.id)
 
         const purObj = {
             customer: props.customer,

@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css'
 import { useSelector } from 'react-redux';
 
 function Menu(props) {
     const isAdmin = useSelector(state => state.isAdmin)
-    const loggedIn = useSelector(state => state.loggedIn)
-    const nav = useNavigate()
 
-    // useEffect(()=>{
-    //     if(loggedIn){
-    //         nav('/login')
-    //     }
-
-
-    // },[])
 
 
     return (

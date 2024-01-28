@@ -81,32 +81,32 @@ function Purchased(props) {
 
     const handleSearchV2 = async (params) => {
         let q = {
-            cust: selectedCust == '' ? false : true,
-            prod: selectedProd == '' ? false : true,
-            date: selectedDate == '' ? false : true
+            cust: selectedCust === '' ? false : true,
+            prod: selectedProd === '' ? false : true,
+            date: selectedDate === '' ? false : true
         }
 
         const formattedDate = formatDate(selectedDate)
-        const cust = await utils.getQueryData('customers', 'id', selectedCust == '' ? '!=' : '==', selectedCust)
-        const prod = await utils.getQueryData('products', 'id', selectedProd == '' ? '!=' : '==', selectedProd)
-        const date = await utils.getQueryData('purchases', 'date', selectedDate == '' ? '!=' : '==', formattedDate)
+        const cust = await utils.getQueryData('customers', 'id', selectedCust === '' ? '!=' : '==', selectedCust)
+        const prod = await utils.getQueryData('products', 'id', selectedProd === '' ? '!=' : '==', selectedProd)
+        const date = await utils.getQueryData('purchases', 'date', selectedDate ==='' ? '!=' : '==', formattedDate)
 
         const final = []
         let double = false
         for (let i in date) {
             if (q.cust) {
                 if (q.prod) {
-                    date[i].customerId == selectedCust && date[i].products.some(d => d.id == selectedProd) && final.push(date[i])
+                    date[i].customerId === selectedCust && date[i].products.some(d => d.id == selectedProd) && final.push(date[i])
                     double = true
                 } else {
-                    date[i].customerId == selectedCust && final.push(date[i])
+                    date[i].customerId === selectedCust && final.push(date[i])
 
                 }
             } else if (q.prod) {
                 if (q.cust && !double) {
-                    date[i].products.some(p => p.id == selectedProd) && date[i].customerId == selectedCust && final.push(date[i])
+                    date[i].products.some(p => p.id === selectedProd) && date[i].customerId == selectedCust && final.push(date[i])
                 } else if (!double) {
-                    date[i].products.some(p => p.id == selectedProd) && final.push(date[i])
+                    date[i].products.some(p => p.id === selectedProd) && final.push(date[i])
 
                 }
             }

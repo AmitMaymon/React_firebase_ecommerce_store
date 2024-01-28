@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import utils from '../utils';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EditCustomer from './EditCustomer';
 import Swal from 'sweetalert2'
 import BuyCustomer from './BuyCustomer';
@@ -15,7 +15,6 @@ function Cutomers(props) {
     const [clickedBuy, setClickedBuy] = useState(false)
     const [clickedCustomerId, setClickedCustomerId] = useState('')
     const [buyingCustomer, setBuyingCustomer] = useState({})
-    const nav = useNavigate()
 
     useEffect(() => {
 
@@ -77,9 +76,9 @@ function Cutomers(props) {
         setClickedBuy(false)
         setClickedPurchases(false)
 
-        if (btnId == 'edit') {
+        if (btnId === 'edit') {
 
-            if (cust.id == clickedCustomerId && clickedCustomer) {
+            if (cust.id === clickedCustomerId && clickedCustomer) {
                 setClickedCustomer(false)
                 return
             }
@@ -87,8 +86,8 @@ function Cutomers(props) {
             setClickedCustomerId(cust.id)
             setClickedCustomer(true)
 
-        } else if (btnId == 'buy') {
-            if (cust.id == clickedCustomerId && clickedBuy) {
+        } else if (btnId === 'buy') {
+            if (cust.id === clickedCustomerId && clickedBuy) {
                 setClickedBuy(false)
                 return
             }
@@ -96,7 +95,7 @@ function Cutomers(props) {
             setClickedBuy(true)
 
         } else if (btnId == 'purc') {
-            if (cust.id == clickedCustomerId && clickedPurchases) {
+            if (cust.id === clickedCustomerId && clickedPurchases) {
                 setClickedPurchases(false)
                 return
             }

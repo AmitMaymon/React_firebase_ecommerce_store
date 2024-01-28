@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { auth, db } from '../firebase/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ts from 'time-stamp';
 import utils from '../utils';
@@ -10,7 +10,6 @@ import utils from '../utils';
 function Login(props) {
     const nav = useNavigate()
     const dispatch = useDispatch()
-    const loggedIn = useSelector(state => state.loggedIn)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [admin, setAdmin] = useState(false)
@@ -97,7 +96,7 @@ function Login(props) {
         cursor: 'pointer',
         width: '60%'
     };
-
+    
     return (
         <div className='customers-container'>
             <div style={formStyle}>
