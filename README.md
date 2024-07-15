@@ -1,4 +1,19 @@
-# Getting Started with Create React App
+#E-commerce platform 
+Hey!
+I've built an E-commerce platform,
+Basically you can view the site as a regular shopper or 
+as an admin.
+
+admin has special permissions to edit items/cards in all asepcts(price/photos/description).
+
+
+when you run the project you need to connect your own firebase.
+when the site runs you can toggle on the login/register screen if you want admin privilages(just for ease of use).
+
+let me know what you think!
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
