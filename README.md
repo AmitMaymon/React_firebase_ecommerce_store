@@ -1,4 +1,4 @@
-#E-commerce platform 
+# E-commerce platform 
 Hey!
 I've built an E-commerce platform,
 Basically you can view the site as a regular shopper or 
